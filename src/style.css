@@ -1,0 +1,178 @@
+:root {
+  --term-green: #33ff33;
+  --term-bg: #0d0d0d;
+  --term-glow: text-shadow: 0 0 2px #00cc00, 0 0 10px #00cc00;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--term-bg);
+  color: var(--term-green);
+  font-family: 'VT323', monospace;
+  font-size: 24px;
+  overflow: hidden;
+  text-shadow: 0 0 5px rgba(51, 255, 51, 0.5);
+  cursor: text;
+}
+
+/* CRT Effects */
+#crt-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%,
+      rgba(0, 0, 0, 0.25) 50%),
+    linear-gradient(90deg,
+      rgba(255, 0, 0, 0.06),
+      rgba(0, 255, 0, 0.02),
+      rgba(0, 0, 255, 0.06));
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
+  z-index: 100;
+}
+
+#scanline {
+  width: 100%;
+  height: 100px;
+  z-index: 101;
+  background: linear-gradient(0deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(51, 255, 51, 0.1) 50%,
+      rgba(0, 0, 0, 0) 100%);
+  opacity: 0.1;
+  position: fixed;
+  bottom: 100%;
+  pointer-events: none;
+  animation: scanline 10s linear infinite;
+}
+
+@keyframes scanline {
+  0% {
+    bottom: 100%;
+  }
+
+  100% {
+    bottom: -100px;
+  }
+}
+
+/* Terminal Container */
+#terminal {
+  padding: 2rem;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+#output {
+  margin-bottom: 10px;
+  white-space: pre-wrap;
+}
+
+.output-line {
+  margin: 5px 0;
+  line-height: 1.2;
+}
+
+#input-line {
+  display: flex;
+  align-items: center;
+}
+
+.prompt {
+  margin-right: 10px;
+  color: #00cc00;
+}
+
+.cursor {
+  animation: blink 1s step-end infinite;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--term-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--term-green);
+}
+
+/* Tree Page */
+.container {
+  padding: 2rem;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tree-content {
+  border: 1px solid var(--term-green);
+  padding: 2rem;
+  min-width: 400px;
+  box-shadow: 0 0 10px rgba(51, 255, 51, 0.1);
+}
+
+.tree-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.tree-list li {
+  margin: 0.5rem 0;
+  font-size: 1.2em;
+}
+
+.tree-list a {
+  color: var(--term-green);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.tree-list a:hover {
+  text-decoration: none;
+  border-bottom: 1px solid var(--term-green);
+  text-shadow: 0 0 8px var(--term-green);
+}
+
+.dim {
+  color: rgba(51, 255, 51, 0.4);
+}
+
+.comment {
+  color: rgba(51, 255, 51, 0.3);
+  font-style: italic;
+  font-size: 0.8em;
+  margin-left: 15px;
+}
