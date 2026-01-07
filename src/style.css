@@ -166,6 +166,18 @@ body {
   text-shadow: 0 0 8px var(--term-green);
 }
 
+.tree-content h1 a {
+  color: var(--term-green);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.tree-content h1 a:hover {
+  border-bottom: 1px solid var(--term-green);
+  text-shadow: 0 0 8px var(--term-green);
+}
+
 .dim {
   color: rgba(51, 255, 51, 0.4);
 }

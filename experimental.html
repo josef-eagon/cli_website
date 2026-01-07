@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CLI Portfolio - Tree</title>
+    <title>CLI Portfolio - Experimental</title>
     <!-- Google Fonts for VT323 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,16 +15,14 @@
 <body>
     <div id="crt-overlay"></div>
     <div id="scanline"></div>
-    <div class="container">
-        <div class="tree-content">
-            <h1>/root</h1>
-            <ul class="tree-list">
-                <li>├── <span class="dim">gallery/</span> <span class="comment">(coming soon)</span></li>
-                <li>├── <a href="/projects.html">projects/</a></li>
-                <li>└── <a href="/">terminal</a></li>
-            </ul>
+    <div id="terminal">
+        <div id="output"></div>
+        <div id="input-line">
+            <span class="prompt">user@experimental:~$</span>
+            <span id="command-input"></span><span class="cursor">█</span>
         </div>
     </div>
+    <script type="module" src="/src/experimental.js"></script>
 </body>
 
 </html>
