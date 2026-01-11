@@ -149,7 +149,10 @@ class Terminal {
 
         // In a real app with routing we might check for valid pages first
         // For now, we assume simple HTML files for other pages
-        window.location.href = `/${page}.html`;
+        const baseUrl = import.meta.env.BASE_URL;
+        // Ensure we don't double slash if BASE_URL ends with /
+        const prefix = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
+        window.location.href = `${prefix}${page}.html`;
     }
 
     async runHelp() {

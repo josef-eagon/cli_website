@@ -8,7 +8,11 @@ export default defineConfig({
         rollupOptions: {
             input: {
                 main: 'index.html',
-                tree: 'tree.html'
+                tree: 'tree.html',
+                fables: 'fables.html',
+                title1: 'fables/title1.html',
+                title2: 'fables/title2.html',
+                title3: 'fables/title3.html'
             }
         }
     }
