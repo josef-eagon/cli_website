@@ -42,6 +42,7 @@ class Terminal {
             'quote': this.runQuote.bind(this),
             'contact': this.runContact.bind(this),
             'goto': this.runGoto.bind(this),
+            'about': this.runAbout.bind(this),
         };
 
         // Initial greeting
@@ -155,6 +156,10 @@ class Terminal {
         window.location.href = `${prefix}${page}.html`;
     }
 
+    async runAbout() {
+        await this.type("My name is Josef. I love making things. This site is where I put some of my favorites. If you are new to me, I recommend reading one of my fables. Try typing: goto fables.");
+    }
+
     async runHelp() {
         await this.type("EXPERIMENTAL BUILD v0.1");
 
@@ -163,6 +168,7 @@ class Terminal {
         this.print("  help           - Show this message");
         this.print("  quote          - Show a random quote");
         this.print("  contact        - Show contact info");
+        this.print("  about          - Learn more about me");
         this.print("  goto <page>    - Navigate to a specific page");
         this.print("  clear          - Clear terminal");
     }

@@ -16,15 +16,20 @@
     <div id="crt-overlay"></div>
     <div id="scanline"></div>
     <div class="container">
-        <div class="tree-content">
-            <h1><a href="tree.html">/root</a>/fables</h1>
-            <ul class="tree-list">
-                <li>├── <a href="fables/title1.html">&lt;title 1&gt;</a></li>
-                <li>├── <a href="fables/title2.html">&lt;title 2&gt;</a></li>
-                <li>└── <a href="fables/title3.html">&lt;title 3&gt;</a></li>
-            </ul>
+        <div class="rolodex-wrapper" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+            <div
+                style="width: 100%; max-width: 800px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                <h1><a href="tree.html">/root</a>/fables</h1>
+                <div class="controls-hint" style="font-size: 0.8em; color: rgba(51,255,51,0.5);">[SCROLL TO BROWSE]
+                </div>
+            </div>
+
+            <div id="rolodex-container" class="rolodex-viewport">
+                <!-- Javascript will inject the cylinder here -->
+            </div>
         </div>
     </div>
+    <script type="module" src="/src/fables.js"></script>
 </body>
 
 </html>

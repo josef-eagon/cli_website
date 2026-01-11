@@ -1,0 +1,73 @@
+/* Rolodex Container - The Viewport */
+.rolodex-viewport {
+    perspective: 1000px;
+    width: 100%;
+    height: 60vh;
+    /* Adjust as needed */
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Masking for top and bottom fade effect */
+    mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+    -webkit-mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+}
+
+/* The Cylinder */
+.rolodex-cylinder {
+    position: relative;
+    transform-style: preserve-3d;
+    width: 600px;
+    /* Width of the cards */
+    height: 0;
+    /* Center of rotation */
+    transition: transform 0.1s ease-out;
+    /* Smooth scrolling */
+}
+
+/* Individual Items */
+.rolodex-item {
+    position: absolute;
+    width: 100%;
+    height: 50px;
+    /* Base height for calculation */
+    left: 0;
+    top: -25px;
+    /* Center the item relative to its transform origin */
+
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+
+    border: 1px solid rgba(51, 255, 51, 0.3);
+    background: rgba(13, 13, 13, 0.95);
+    color: var(--term-green);
+    font-family: 'VT323', monospace;
+    font-size: 1.5rem;
+    text-decoration: none;
+
+    backface-visibility: hidden;
+    /* Hide back if we want, or keep it */
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, text-shadow 0.2s;
+}
+
+.rolodex-item:hover {
+    background: rgba(51, 255, 51, 0.1);
+    border-color: var(--term-green);
+    text-shadow: 0 0 5px var(--term-green);
+}
+
+.rolodex-item .index {
+    margin-right: 15px;
+    opacity: 0.5;
+    font-size: 0.8em;
+}
+
+.rolodex-item .title {
+    flex-grow: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
