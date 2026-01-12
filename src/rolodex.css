@@ -40,7 +40,8 @@
     align-items: center;
     padding: 0 20px;
 
-    border: 1px solid rgba(51, 255, 51, 0.3);
+    /* border: 1px solid rgba(51, 255, 51, 0.3); */
+    /* Remove borders as requested */
     background: rgba(13, 13, 13, 0.95);
     color: var(--term-green);
     font-family: 'VT323', monospace;
@@ -50,12 +51,12 @@
     backface-visibility: hidden;
     /* Hide back if we want, or keep it */
     cursor: pointer;
-    transition: background 0.2s, border-color 0.2s, text-shadow 0.2s;
+    transition: background 0.2s, text-shadow 0.2s;
 }
 
 .rolodex-item:hover {
     background: rgba(51, 255, 51, 0.1);
-    border-color: var(--term-green);
+    /* border-color: var(--term-green); */
     text-shadow: 0 0 5px var(--term-green);
 }
 

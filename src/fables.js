@@ -81,6 +81,16 @@ class Rolodex {
 
     setupEvents() {
         // Scroll wheel
+        // Scroll bounds
+        // Angle 0 corresponds to item 0.
+        // Item N is at angle -N * stepAngle.
+        // To view item N, cylinder must rotate +N * stepAngle.
+        // So max positive rotation is (itemCount - 1) * stepAngle.
+        // Min rotation is 0 (or slightly negative for elasticity).
+        this.maxScroll = (this.itemCount - 1) * this.stepAngle;
+        this.minScroll = 0;
+
+        // Scroll wheel
         this.viewport.addEventListener('wheel', (e) => {
             e.preventDefault();
             const delta = e.deltaY;
@@ -88,6 +98,10 @@ class Rolodex {
             // Wait, if item 0 is at 0, item 1 is at -step.
             // To see item 1, we need to rotate cylinder by +step.
             this.targetAngle += delta * 0.1;
+
+            // Clamp
+            this.targetAngle = Math.max(this.minScroll, Math.min(this.targetAngle, this.maxScroll));
+
         }, { passive: false });
 
         // Touch/Drag (optional but good for feel)
@@ -107,6 +121,9 @@ class Rolodex {
             // Items above constitute negative index?
             // Let's just try deltaY * conversion
             this.targetAngle = this.startAngle - (deltaY * 0.5);
+
+            // Clamp during drag
+            this.targetAngle = Math.max(this.minScroll, Math.min(this.targetAngle, this.maxScroll));
         });
 
         window.addEventListener('mouseup', () => {
@@ -121,6 +138,9 @@ class Rolodex {
                 } else {
                     this.targetAngle -= remainder;
                 }
+
+                // Final clamp to ensure snap doesn't push slightly out
+                this.targetAngle = Math.max(this.minScroll, Math.min(this.targetAngle, this.maxScroll));
             }
         });
     }
