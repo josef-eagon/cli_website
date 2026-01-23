@@ -56,9 +56,14 @@ class Terminal {
 
   bindEvents() {
     // Focus hidden input on terminal click (for mobile)
-    document.getElementById('terminal').addEventListener('click', () => {
+    const terminal = document.getElementById('terminal');
+    const focusInput = (e) => {
+      // Prevent default only if necessary, but we want focus.
+      // Some browsers block focus on touchstart unless it's direct user interaction.
       this.mobileInput.focus();
-    });
+    };
+    terminal.addEventListener('click', focusInput);
+    terminal.addEventListener('touchstart', focusInput, { passive: true });
 
     // Handle hidden input events (Mobile/Focused mode)
     this.mobileInput.addEventListener('input', (e) => {

@@ -1,4 +1,5 @@
-// import './rolodex.css';
+import './style.css';
+import './rolodex.css';
 
 class Rolodex {
     constructor(containerId) {

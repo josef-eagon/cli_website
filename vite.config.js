@@ -9,6 +9,7 @@ export default defineConfig({
             input: {
                 main: 'index.html',
                 tree: 'tree.html',
+                projects: 'projects.html',
                 fables: 'fables.html',
                 title1: 'fables/title1.html',
                 title2: 'fables/title2.html',
