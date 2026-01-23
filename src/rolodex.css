@@ -12,6 +12,8 @@
     /* Masking for top and bottom fade effect */
     mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
     -webkit-mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+    touch-action: none;
+    z-index: 10;
 }
 
 /* The Cylinder */
