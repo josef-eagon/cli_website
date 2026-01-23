@@ -143,6 +143,41 @@ class Rolodex {
                 this.targetAngle = Math.max(this.minScroll, Math.min(this.targetAngle, this.maxScroll));
             }
         });
+
+        // Touch Interaction
+        this.viewport.addEventListener('touchstart', (e) => {
+            this.isDragging = true;
+            this.startY = e.touches[0].clientY;
+            this.startAngle = this.targetAngle;
+            this.cylinder.style.transition = 'none';
+        }, { passive: false });
+
+        window.addEventListener('touchmove', (e) => {
+            if (!this.isDragging) return;
+            e.preventDefault(); // Prevent scrolling the page while dragging rolodex
+            const deltaY = e.touches[0].clientY - this.startY;
+            this.targetAngle = this.startAngle - (deltaY * 0.5);
+
+            // Clamp
+            this.targetAngle = Math.max(this.minScroll, Math.min(this.targetAngle, this.maxScroll));
+        }, { passive: false });
+
+        window.addEventListener('touchend', () => {
+            if (this.isDragging) {
+                this.isDragging = false;
+                this.cylinder.style.transition = 'transform 0.1s ease-out';
+
+                // Snap
+                const remainder = this.targetAngle % this.stepAngle;
+                if (Math.abs(remainder) > this.stepAngle / 2) {
+                    this.targetAngle += (this.stepAngle * Math.sign(remainder)) - remainder;
+                } else {
+                    this.targetAngle -= remainder;
+                }
+
+                this.targetAngle = Math.max(this.minScroll, Math.min(this.targetAngle, this.maxScroll));
+            }
+        });
     }
 
     animate() {

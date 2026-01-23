@@ -18,8 +18,8 @@
 .rolodex-cylinder {
     position: relative;
     transform-style: preserve-3d;
-    width: 600px;
-    /* Width of the cards */
+    width: 90vw;
+    max-width: 600px;
     height: 0;
     /* Center of rotation */
     transition: transform 0.1s ease-out;

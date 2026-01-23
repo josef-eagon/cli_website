@@ -138,7 +138,8 @@ body {
 .tree-content {
   border: 1px solid var(--term-green);
   padding: 2rem;
-  min-width: 400px;
+  width: 90%;
+  max-width: 400px;
   box-shadow: 0 0 10px rgba(51, 255, 51, 0.1);
 }
 

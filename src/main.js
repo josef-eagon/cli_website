@@ -7,6 +7,7 @@ class Terminal {
     this.output = document.getElementById('output');
     this.commandInput = document.getElementById('command-input');
     this.inputLine = document.getElementById('input-line');
+    this.mobileInput = document.getElementById('mobile-input');
     this.currentInput = '';
 
     this.quotes = [
@@ -54,10 +55,38 @@ class Terminal {
   }
 
   bindEvents() {
+    // Focus hidden input on terminal click (for mobile)
+    document.getElementById('terminal').addEventListener('click', () => {
+      this.mobileInput.focus();
+    });
+
+    // Handle hidden input events (Mobile/Focused mode)
+    this.mobileInput.addEventListener('input', (e) => {
+      this.currentInput = this.mobileInput.value;
+      this.updateInputDisplay();
+      window.scrollTo(0, document.body.scrollHeight);
+    });
+
+    this.mobileInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const cmd = this.currentInput.trim();
+        this.print(`user@portfolio:~$ ${this.currentInput}`);
+        this.currentInput = '';
+        this.mobileInput.value = ''; // Clear hidden input
+        this.updateInputDisplay();
+        this.executeCommand(cmd);
+      }
+    });
+
+    // Handle global keys (Desktop/Unfocused mode)
     document.addEventListener('keydown', (e) => {
+      // Ignore if typing in the hidden input to avoid double chars
+      if (e.target === this.mobileInput) return;
+
       // Handle backspace
       if (e.key === 'Backspace') {
         this.currentInput = this.currentInput.slice(0, -1);
+        this.mobileInput.value = this.currentInput; // Sync hidden input
         this.updateInputDisplay();
         return;
       }
@@ -67,6 +96,7 @@ class Terminal {
         const cmd = this.currentInput.trim();
         this.print(`user@portfolio:~$ ${this.currentInput}`);
         this.currentInput = '';
+        this.mobileInput.value = ''; // Sync hidden input
         this.updateInputDisplay();
         this.executeCommand(cmd);
         return;
@@ -75,6 +105,7 @@ class Terminal {
       // Handle regular characters
       if (e.key.length === 1 && !e.ctrlKey && !e.altKey && !e.metaKey) {
         this.currentInput += e.key;
+        this.mobileInput.value = this.currentInput; // Sync hidden input
         this.updateInputDisplay();
         // Keep window scrolled to bottom
         window.scrollTo(0, document.body.scrollHeight);
